@@ -1,0 +1,21 @@
+/*Regular Posts Element CSS*/
+.single-regular-post-content-area {
+    padding: 15px;
+}
+.regular-post-title {
+    font-family: 'Roboto', sans-serif; font-size: 30px;line-height: 1.2;font-weight: 700;margin-top: 20px;
+}
+
+.regular-post-excerpt {
+    font-family: 'Roboto', sans-serif;
+    font-size: 18px;
+    font-weight: 400;
+    margin-top: 15px;
+}
+
+.post-meta-tag {
+    font-family: 'Roboto', sans-serif;
+    font-size: 20px;
+    font-weight: 500;
+    margin-top: 15px;
+}
