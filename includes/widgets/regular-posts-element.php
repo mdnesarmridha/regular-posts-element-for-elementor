@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Regular Posts Element.
  *
@@ -7,7 +6,6 @@
  *
  * @since 1.0.0
  */
-
 
 // Regular Posts Type
 function get_regular_post_type() {
@@ -87,6 +85,20 @@ class Regular_Posts_Element extends \Elementor\Widget_Base {
 	}
 
 	/**
+	 * Get widget Style.
+	 */
+
+	public function get_style_depends() {
+
+		wp_register_style( 'regular-posts-element', plugins_url( '../../assets/css/frontend/regular-posts-element.css', __FILE__ ) );
+
+		return [
+			'regular-posts-element',
+		];
+
+	}
+
+	/**
 	 * Get widget categories.
 	 *
 	 * Retrieve the list of categories the oEmbed widget belongs to.
@@ -98,13 +110,6 @@ class Regular_Posts_Element extends \Elementor\Widget_Base {
 	 */
 	public function get_categories() {
 		return [ 'basic' ];
-	}
-
-	/**
-	 * Get widget Style.
-	 */
-	public function get_style_depends(){
-		return [ 'regular-posts-element' ];
 	}
 
 	/**
@@ -263,6 +268,23 @@ class Regular_Posts_Element extends \Elementor\Widget_Base {
 			]
 		);
 
+        // Posts Status
+		$this->add_control(
+			'regular_post_status',
+			[
+				'label' => __( 'Posts Status', 'regular-posts-element' ),
+				'type' => \Elementor\Controls_Manager::SELECT,
+				'default'=> 'publish',
+				'options' => [
+					'publish' => esc_html__( 'Publish', 'regular-posts-element' ),
+					'pending' => esc_html__( 'Pending', 'regular-posts-element' ),
+					'draft' => esc_html__( 'Draft', 'regular-posts-element' ),
+					'future' => esc_html__( 'Future', 'regular-posts-element' ),
+					'private' => esc_html__( 'Private', 'regular-posts-element' ),
+				],
+			]
+		);
+
         // OrderBy
 		$this->add_control(
 			'regular_posts_orderby',
@@ -341,10 +363,12 @@ class Regular_Posts_Element extends \Elementor\Widget_Base {
 			[
 				'label' => __( 'Columns', 'regular-posts-element' ),
 				'type' => \Elementor\Controls_Manager::SELECT,
-				'default' => '1',
-				'tablet_default' => '1',
+				'default' => '3',
+				'tablet_default' => '2',
 				'mobile_default' => '1',
 				'options' => [
+					'6' => __('6 Columns','regular-posts-element'),
+					'5' => __('5 Columns','regular-posts-element'),
 					'4' => __('4 Columns','regular-posts-element'),
 					'3' => __('3 Columns','regular-posts-element'),
 					'2' => __('2 Columns','regular-posts-element'),
@@ -388,6 +412,7 @@ class Regular_Posts_Element extends \Elementor\Widget_Base {
 		$total_posts_number = $settings['total_posts_number'];
 		$regular_posts_orderby = $settings['regular_posts_orderby'];
 		$regular_posts_order = $settings['regular_posts_order'];
+		$regular_post_status = $settings['regular_post_status'];
 
 
 		if($settings['select_posts_categories'] == 'yes'):
@@ -403,6 +428,7 @@ class Regular_Posts_Element extends \Elementor\Widget_Base {
 			            'terms'    => $posts_categories_ids,
 			        ),
 			    ),
+			    'post_status' => $regular_post_status,
 	        )); 
 	    else:
  			$reqular_post_query = new WP_Query(array(
@@ -410,6 +436,7 @@ class Regular_Posts_Element extends \Elementor\Widget_Base {
 				'posts_per_page' => $total_posts_number,
 				'orderby'	=> $regular_posts_orderby,
 				'order'	=> $regular_posts_order,
+			    'post_status' => $regular_post_status,
 	        )); 
 	    endif;
 	    ?>
@@ -476,6 +503,8 @@ class Regular_Posts_Element extends \Elementor\Widget_Base {
   				</div>
   			<?php
 				endwhile; endif;
+				/* Restore original Post Data */
+				wp_reset_postdata();
 			?>				
 		</div>
 		<?php

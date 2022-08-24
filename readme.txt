@@ -3,7 +3,7 @@ Contributors: mdnesarmridha
 Tags: Regular Posts, Elementor Posts, Posts, Posts Addon, Posts Widget, Post
 Requires at least: 4.7
 Tested up to: 6.0.1
-Stable tag: 1.0.0
+Stable tag: 1.0.1
 Requires PHP: 7.3
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -30,5 +30,8 @@ Just install and active this plugin then you will get Regular Posts Element widg
 
 == Changelog ==
 
-= 1.0 =
+= 1.0.0 =
 * Just release new version.
+
+= 1.0.1 =
+* Fixed Errors and Add Status Qurey.

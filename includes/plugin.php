@@ -1,5 +1,4 @@
 <?php
-
 namespace Regular_Posts_Element_For_Elementor;
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -189,6 +188,41 @@ final class Plugin {
 	}
 
 
+	/**
+	 * Initialize
+	 *
+	 * Load the addons functionality only after Elementor is initialized.
+	 *
+	 * Fired by `elementor/init` action hook.
+	 *
+	 * @since 1.0.0
+	 * @access public
+	 */
+	public function init() {
+
+		add_action( 'elementor/widgets/register', [ $this, 'register_new_regular_posts_element_widgets' ] );
+
+	}
+
+	/**
+	 * Register Widgets
+	 *
+	 * Load widgets files and register new Elementor widgets.
+	 *
+	 * Fired by `elementor/widgets/register` action hook.
+	 *
+	 * @param \Elementor\Widgets_Manager $widgets_manager Elementor widgets manager.
+	 */
+	
+    public function register_new_regular_posts_element_widgets( $widgets_manager ) {
+
+	   //Image List Box
+	   require_once( __DIR__ . '/widgets/regular-posts-element.php' );
+
+	   $widgets_manager->register( new \Regular_Posts_Element() );
+
+	}
+	
 
 
 }
