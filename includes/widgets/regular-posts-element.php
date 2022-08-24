@@ -357,6 +357,16 @@ class Regular_Posts_Element extends \Elementor\Widget_Base {
 			]
 		);
 
+		// Box Style
+		$this->add_control(
+			'regular_posts_box_heading',
+			[
+				'label'		=> esc_html__( 'Box Style', 'regular-posts-element' ),
+				'type'		=> \Elementor\Controls_Manager::HEADING,
+				'separator'	=> 'before',
+			]
+		);
+
 		//Columns
 		$this->add_responsive_control(
 			'posts_layout_columns',
@@ -376,11 +386,173 @@ class Regular_Posts_Element extends \Elementor\Widget_Base {
 				],
 				'frontend_available' => true,
 				'selectors' => [
-					'{{WRAPPER}} .single-regular-posts-column' => 'width: calc( 100% / {{SIZE}} ); display:inline-block;',
+					'{{WRAPPER}} .single-regular-posts-column' => 'width: calc( 100% / {{SIZE}} ); display:inline-flex;',
 				],
 			]
 		);
 
+		//Background Margin
+		$this->add_responsive_control(
+			'regular_posts_box_margin',
+			[
+				'label' => esc_html__( 'Item Margin', 'regular-posts-element' ),
+				'type' => \Elementor\Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', '%', 'em' ],
+				'selectors' => [
+					'{{WRAPPER}} .single-regular-post-content-area' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+
+		//Background Padding
+		$this->add_responsive_control(
+			'regular_posts_box_padding',
+			[
+				'label' => esc_html__( 'Item Padding', 'regular-posts-element' ),
+				'type' => \Elementor\Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', '%', 'em' ],
+				'selectors' => [
+					'{{WRAPPER}} .single-regular-post-content-area' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+
+		//Background Color
+		$this->add_group_control(
+			\Elementor\Group_Control_Background::get_type(),
+			[
+				'name'		=>'regular_posts_background',
+				'label'		=>esc_html__( 'Background', 'regular-posts-element'),
+				'types'     => [ 'classic', 'gradient' ],
+				'selector'	=> '{{WRAPPER}} .single-regular-post-content-area',
+			]
+		);
+
+		//Background Shadow
+		$this->add_group_control(
+			\Elementor\Group_Control_Box_Shadow::get_type(),
+			[
+				'name' => 'regular_posts_background_shadow',
+				'label' => esc_html__( 'Box Shadow', 'regular-posts-element' ),
+				'selector' => '{{WRAPPER}} .single-regular-post-content-area',
+			]
+		);
+
+		// Heading Title Style
+		$this->add_control(
+			'regular_posts_heading_title',
+			[
+				'label'		=> esc_html__( 'Title', 'regular-posts-element' ),
+				'type'		=> \Elementor\Controls_Manager::HEADING,
+				'separator'	=> 'before',
+			]
+		);
+
+		//Title Color
+		$this->add_responsive_control(
+			'regular_posts_title_color',
+			[
+				'label' => esc_html__( 'Color', 'regular-posts-element' ),
+				'type' => \Elementor\Controls_Manager::COLOR,
+				'show_label' => true,
+				'selectors' => [
+					'{{WRAPPER}} .regular-post-title, {{WRAPPER}} .regular-post-title a' => 'color: {{VALUE}}',
+				],
+			]
+		);
+
+		//Title Typography
+		$this->add_group_control(
+			\Elementor\Group_Control_Typography::get_type(),
+			[
+				'name' => 'regular_posts_title_typography',
+				'selector' => '{{WRAPPER}} .regular-post-title, {{WRAPPER}} .regular-post-title a',
+			]
+		);
+
+		//Title Padding
+		$this->add_responsive_control(
+			'regular_posts_title_padding',
+			[
+				'label' => esc_html__( 'Padding', 'regular-posts-element' ),
+				'type' => \Elementor\Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', '%', 'em' ],
+				'selectors' => [
+					'{{WRAPPER}} .regular-post-title' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+		
+		//Title Margin
+		$this->add_responsive_control(
+			'regular_posts_title_margin',
+			[
+				'label' => esc_html__( 'Margin', 'regular-posts-element' ),
+				'type' => \Elementor\Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', '%', 'em' ],
+				'selectors' => [
+					'{{WRAPPER}} .regular-post-title' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+
+		// Heading Excerpt Style
+		$this->add_control(
+			'regular_posts_excerpt',
+			[
+				'label'		=> esc_html__( 'Excerpt', 'regular-posts-element' ),
+				'type'		=> \Elementor\Controls_Manager::HEADING,
+				'separator'	=> 'before',
+			]
+		);
+
+		//Title Color
+		$this->add_responsive_control(
+			'regular_posts_excerpt_color',
+			[
+				'label' => esc_html__( 'Color', 'regular-posts-element' ),
+				'type' => \Elementor\Controls_Manager::COLOR,
+				'show_label' => true,
+				'selectors' => [
+					'{{WRAPPER}} .regular-post-excerpt' => 'color: {{VALUE}}',
+				],
+			]
+		);
+
+		//Title Typography
+		$this->add_group_control(
+			\Elementor\Group_Control_Typography::get_type(),
+			[
+				'name' => 'regular_posts_excerpt_typography',
+				'selector' => '{{WRAPPER}} .regular-post-excerpt',
+			]
+		);
+
+		//Title Padding
+		$this->add_responsive_control(
+			'regular_posts_excerpt_padding',
+			[
+				'label' => esc_html__( 'Padding', 'regular-posts-element' ),
+				'type' => \Elementor\Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', '%', 'em' ],
+				'selectors' => [
+					'{{WRAPPER}} .regular-post-excerpt' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+		
+		//Title Margin
+		$this->add_responsive_control(
+			'regular_posts_excerpt_margin',
+			[
+				'label' => esc_html__( 'Margin', 'regular-posts-element' ),
+				'type' => \Elementor\Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', '%', 'em' ],
+				'selectors' => [
+					'{{WRAPPER}} .regular-post-excerpt' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
 		
 
 		$this->end_controls_section();
